@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmodes.rr_tuning.mecanum;
+package org.firstinspires.ftc.teamcode.opmodes.auto;
 
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
@@ -6,9 +6,9 @@ import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.MecanumDrive;
+import org.firstinspires.ftc.teamcode.subsystems.MecanumDrive;
 @Autonomous
-public class pushBot extends LinearOpMode {
+public class PushBot extends LinearOpMode {
     public void runOpMode() {
         Pose2d beginPose = new Pose2d(-35, -61, Math.toRadians(-90));
         MecanumDrive drive = new MecanumDrive(hardwareMap, beginPose);
