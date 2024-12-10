@@ -66,14 +66,14 @@ public final class MecanumDrive {
                 RevHubOrientationOnRobot.UsbFacingDirection.FORWARD;
 
         // drive model parameters
-        private static final double IN_PER_TICK = 72.0 / 24164;
-        private static final double LATERAL_IN_PER_TICK = 0.002458710483066915;
-        private static final double TRACK_WIDTH_TICKS = 5024.768255226936;
+        private static final double IN_PER_TICK = 0; //72.0 / 24164;
+        private static final double LATERAL_IN_PER_TICK = 0; // 0.002458710483066915;
+        private static final double TRACK_WIDTH_TICKS = 0;// 5024.768255226936;
 
         // feedforward parameters (in tick units)
-        private static final double KS = 0.7629513277738496;
-        private static final double KV = 0.0005866164156085399;
-        private static final double KA = 0.00001;
+        private static final double KS = 0; //0.7629513277738496;
+        private static final double KV = 0; //0.0005866164156085399;
+        private static final double KA = 0; //0.00001;
 
         // path profile parameters (in inches)
         private static final double MAX_WHEEL_VEL = 50;
@@ -135,8 +135,8 @@ public final class MecanumDrive {
 
         VoltageSensor voltageSensor = hardwareMap.voltageSensor.iterator().next();
 
-        OverflowEncoder perp = new OverflowEncoder(new RawEncoder(rightBack));
-        OverflowEncoder par01 = new OverflowEncoder(new RawEncoder(leftBack));
+        OverflowEncoder perp = new OverflowEncoder(new RawEncoder(leftBack));
+        OverflowEncoder par01 = new OverflowEncoder(new RawEncoder(rightFront));
         OverflowEncoder par00 = new OverflowEncoder(new RawEncoder(leftFront));
 
         par00.setDirection(DcMotorSimple.Direction.REVERSE);

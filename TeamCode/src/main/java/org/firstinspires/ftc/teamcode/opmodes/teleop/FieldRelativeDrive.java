@@ -55,9 +55,25 @@ public class FieldRelativeDrive extends LinearOpMode {
             else if (gamepad1.dpad_down) {
                 armPivot.armDown();
             }
+            else if (gamepad1.x) {
+                armPivot.goToAngle(Pivot.LOW_BASKET_SCORING_ANGLE);
+            }
+            else if (gamepad1.y) {
+                armPivot.goToAngle(Pivot.INTAKE_ANGLE);
+            }
             else {
                 armPivot.armStop();
             }
+
+
+            if (gamepad1.back) {
+                armPivot.zeroEncoder();
+            }
+
+
+
+
+
 
 
         }
