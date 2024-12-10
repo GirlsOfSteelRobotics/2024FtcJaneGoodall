@@ -17,8 +17,8 @@ public class Pivot {
 //    public static double DEGREES_PER_TICK = 1; // (1.9 - 41.6) / (6240 - 3055);
     public static double DEGREES_PER_TICK = (-.8 + 91.6) / (42 - -2036);
     public static double KP = 0.16;
-    public static boolean ENFORCE_LIMITS = true;
-    public static int LOW_BASKET_SCORING_ANGLE = 155;
+    public static boolean ENFORCE_LIMITS = false;
+    public static int LOW_BASKET_SCORING_ANGLE = 158;
     public static double INTAKE_ANGLE = 250;
     public static double LOWER_LIMIT = 0;
     public static double UPPER_LIMIT = 250;
@@ -57,10 +57,17 @@ public class Pivot {
         return -(ticks.position - tickOffset) * DEGREES_PER_TICK;
     }
 
-    public void goToAngle(double angle) {
+    public boolean goToAngle(double angle) {
         double error = getAngle()-angle;
         double power = -KP * error;
         armPivotMotor.setPower(power);
+        if (Math.abs(error) > 0.5) {
+            return false;
+        }
+        else {
+            return true;
+        }
+
     }
     public void zeroEncoder() {
         tickOffset = encoder.getPositionAndVelocity().position;
