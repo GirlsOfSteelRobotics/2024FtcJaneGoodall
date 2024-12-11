@@ -19,11 +19,12 @@ public class Pivot {
     public static double KP = 0.16;
     public static boolean ENFORCE_LIMITS = false;
     public static int LOW_BASKET_SCORING_ANGLE = 158;
-    public static double INTAKE_ANGLE = 250;
+    public static double INTAKE_ANGLE = 270;
     public static double LOWER_LIMIT = 0;
     public static double UPPER_LIMIT = 250;
+    public static double MAX_PID_POWER = 0.8;
 
-    private int tickOffset;
+    private static int tickOffset;
 
     public Pivot(HardwareMap hardwareMap) {
         armPivotMotor = hardwareMap.get(DcMotorSimple.class, "armPivotMotor");
@@ -60,6 +61,11 @@ public class Pivot {
     public boolean goToAngle(double angle) {
         double error = getAngle()-angle;
         double power = -KP * error;
+        if (power > MAX_PID_POWER) {
+            power = MAX_PID_POWER;
+        } else if (power < -MAX_PID_POWER) {
+            power = -MAX_PID_POWER;
+        }
         armPivotMotor.setPower(power);
         if (Math.abs(error) > 0.5) {
             return false;

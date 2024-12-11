@@ -6,8 +6,8 @@ import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.actions.AutoIntakeAction;
-import org.firstinspires.ftc.teamcode.actions.ScoreIntoLowBasket;
+import org.firstinspires.ftc.teamcode.actions.ArmToAngleAction;
+import org.firstinspires.ftc.teamcode.actions.CombinedActions;
 import org.firstinspires.ftc.teamcode.subsystems.IntakeServo;
 import org.firstinspires.ftc.teamcode.subsystems.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.Pivot;
@@ -23,11 +23,14 @@ public class LowBasketAuto extends LinearOpMode {
         waitForStart();
 
         Actions.runBlocking(drive.actionBuilder(beginPose)
-                // START COPY AND PASTE
+                 //START COPY AND PASTE
                 .setReversed(true)
-                .splineTo(new Vector2d(-53,-53), Math.toRadians(-135))
-//                .stopAndAdd(new AutoIntakeAction(intake, pivot))
-                .stopAndAdd(new ScoreIntoLowBasket(intake, pivot))
+                    .splineTo(new Vector2d(-53,-53), Math.toRadians(-135))
+                    .stopAndAdd(CombinedActions.createScorePieceInLowBasketAction(pivot, intake))
+                    .strafeToSplineHeading(new Vector2d(-28, -41), Math.toRadians(-45))
+                    .stopAndAdd(new ArmToAngleAction(pivot, Pivot.INTAKE_ANGLE))
+                    .afterTime(0.0, CombinedActions.createIntakePieceAction(pivot, intake, 7))
+                    .strafeTo(new Vector2d(-45, -27.5))
 
 
                 // END COPY AND PASTE

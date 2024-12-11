@@ -9,10 +9,11 @@ import org.firstinspires.ftc.teamcode.subsystems.Pivot;
 
 public class CombinedActions {
 
-    public static Action createScorePieceInLowBasketAction(Pivot pivot, IntakeServo intake, double secondsToRunIntake) {
+    public static Action createScorePieceInLowBasketAction(Pivot pivot, IntakeServo intake) {
         return new SequentialAction(
             new ArmToAngleAction(pivot, Pivot.LOW_BASKET_SCORING_ANGLE),
-            new IntakeOutAction(intake, secondsToRunIntake)
+            new IntakeOutAction(intake, 3),
+                new ArmToAngleAction(pivot, 140)
         );
     }
 

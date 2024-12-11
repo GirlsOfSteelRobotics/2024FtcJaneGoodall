@@ -9,6 +9,9 @@ import com.noahbres.meepmeep.MeepMeep;
 import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
 import com.noahbres.meepmeep.roadrunner.DriveShim;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
+import com.gos.meepmeeptesting.FakeCommands.CombinedActions;
+import com.gos.meepmeeptesting.FakeCommands.ArmToAngleAction;
+import com.gos.meepmeeptesting.FakeCommands.Pivot;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -19,24 +22,6 @@ public class Main {
         Object intake = null;
         Object pivot = null;
 
-        class AutoIntakeAction implements Action {
-            public AutoIntakeAction(Object intake, Object pivot) {
-            }
-
-            @Override
-            public boolean run(@NotNull TelemetryPacket telemetryPacket) {
-                return false;
-            }
-        }
-        class ScoreIntoLowBasket implements Action {
-            public ScoreIntoLowBasket(Object intake, Object pivot) {
-            }
-
-            @Override
-            public boolean run(@NotNull TelemetryPacket telemetryPacket) {
-                return false;
-            }
-        }
 
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
@@ -45,11 +30,13 @@ public class Main {
 
         myBot.runAction(myBot.getDrive().actionBuilder(new Pose2d(-35, -61, Math.toRadians(-90)))
                 // START COPY AND PASTE
-                .setReversed(true)
-                .splineTo(new Vector2d(-55,-55), Math.toRadians(-135))
-//                .stopAndAdd(new AutoIntakeAction(intake, pivot))
-                .stopAndAdd(new ScoreIntoLowBasket(intake, pivot))
-                // END COPY AND PASTE
+                .splineTo(new Vector2d(-53,-53), Math.toRadians(-135))
+                .stopAndAdd(CombinedActions.createScorePieceInLowBasketAction(pivot, intake))
+                .strafeToSplineHeading(new Vector2d(-28, -41), Math.toRadians(-45))
+                .stopAndAdd(new ArmToAngleAction(pivot, Pivot.INTAKE_ANGLE))
+                .afterTime(0.0, CombinedActions.createIntakePieceAction(pivot, intake, 7))
+                .strafeTo(new Vector2d(-45, -27.5))
+                // END COPY AND PAS
 
 
 

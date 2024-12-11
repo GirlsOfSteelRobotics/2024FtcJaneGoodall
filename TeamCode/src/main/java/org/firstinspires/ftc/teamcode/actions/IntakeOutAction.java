@@ -33,7 +33,7 @@ public class IntakeOutAction implements Action {
             t = Actions.now() - m_startTime;
         }
 
-        boolean finished = t < m_secondsToRun;
+        boolean finished = t >= m_secondsToRun;
         if (finished) {
             m_intake.intakeStop();
         }

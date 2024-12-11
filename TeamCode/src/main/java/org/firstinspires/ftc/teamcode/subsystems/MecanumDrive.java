@@ -55,6 +55,8 @@ public final class MecanumDrive {
 
     private final MecanumDrivetrain m_drive;
 
+    public static Pose2d STUPID_POSE = new Pose2d(0, 0, 0);
+
     @SuppressWarnings("PMD.FieldNamingConventions")
     public static class Params {
         // IMU orientation
@@ -167,6 +169,7 @@ public final class MecanumDrive {
 
     public void updatePoseEstimate() {
         m_drive.updatePoseEstimate();
+        STUPID_POSE = m_drive.getPose();
     }
 
     public Pose2d getPose() {

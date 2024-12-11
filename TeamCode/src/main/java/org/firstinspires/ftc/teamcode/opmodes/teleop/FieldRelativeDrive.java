@@ -14,7 +14,7 @@ public class FieldRelativeDrive extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        MecanumDrive drive = new MecanumDrive(hardwareMap, new Pose2d(0, 0, 0));
+        MecanumDrive drive = new MecanumDrive(hardwareMap, MecanumDrive.STUPID_POSE);
         IntakeServo intakeServo = new IntakeServo(hardwareMap);
         Pivot armPivot = new Pivot(hardwareMap);
 
@@ -61,12 +61,15 @@ public class FieldRelativeDrive extends LinearOpMode {
             else if (gamepad1.y) {
                 armPivot.goToAngle(Pivot.INTAKE_ANGLE);
             }
+            else if (gamepad1.b) {
+                armPivot.goToAngle(0);
+            }
             else {
                 armPivot.armStop();
             }
 
 
-            if (gamepad1.back) {
+            if (gamepad1.dpad_left) {
                 armPivot.zeroEncoder();
             }
 
