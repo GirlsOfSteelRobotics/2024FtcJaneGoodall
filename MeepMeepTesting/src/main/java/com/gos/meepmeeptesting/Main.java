@@ -33,11 +33,23 @@ public class Main {
                 .setReversed(true)
                 .splineTo(new Vector2d(-53,-53), Math.toRadians(-135))
                 .stopAndAdd(CombinedActions.createScorePieceInLowBasketAction(pivot, intake))
-                .strafeToSplineHeading(new Vector2d(-44, -41), Math.toRadians(0))
-                .stopAndAdd(new ArmToAngleAction(pivot, Pivot.INTAKE_ANGLE))
-                .strafeTo(new Vector2d(-44, -27))
-                .strafeTo(new Vector2d(-55, -27))
-                .afterTime(0.0, CombinedActions.createIntakePieceAction(pivot, intake, 7))
+                                .turnTo(Math.toRadians(-90))
+//
+                .strafeTo(new Vector2d(-35,-61))
+                .strafeTo(new Vector2d(-45,-9))
+                .strafeToConstantHeading(new Vector2d(-45,-55))
+                .strafeTo(new Vector2d(-60,-60))
+                .strafeTo(new Vector2d(-45, - 38))
+                .strafeTo(new Vector2d(-45, -9))
+                .strafeTo(new Vector2d(-56,-9))
+                .strafeTo(new Vector2d(-56,-60))
+                .strafeTo(new Vector2d(-56,-40))
+                .strafeTo(new Vector2d(-56,-8))
+                .turn(Math.toRadians(-90))
+                .strafeTo(new Vector2d(-53,-8))
+                .strafeTo(new Vector2d(-53,-29))
+                .strafeTo(new Vector2d(-63,-29))
+                .strafeTo(new Vector2d(-63,-60))
                 // END COPY AND PAS
 
 
