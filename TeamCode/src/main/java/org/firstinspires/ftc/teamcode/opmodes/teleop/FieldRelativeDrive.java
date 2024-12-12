@@ -1,6 +1,11 @@
 package org.firstinspires.ftc.teamcode.opmodes.teleop;
 
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.canvas.Canvas;
+import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Pose2d;
+import com.gosftc.lib.rr.Drawing;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
@@ -26,6 +31,13 @@ public class FieldRelativeDrive extends LinearOpMode {
             drive.updatePoseEstimate();
 
             Pose2d pose = drive.getPose();
+
+            TelemetryPacket packet = new TelemetryPacket();
+            Canvas canvas = packet.fieldOverlay();
+            drive.getDrive().drawPoseHistory(canvas);
+            canvas.setStroke("#4CAF50");
+            Drawing.drawRobot(canvas, drive.getPose());
+            FtcDashboard.getInstance().sendTelemetryPacket(packet);
 
             telemetry.addData("x", pose.position.x);
             telemetry.addData("y", pose.position.y);
